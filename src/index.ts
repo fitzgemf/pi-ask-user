@@ -37,6 +37,8 @@ export const askUserTool = {
 		"requirements). Provide the question and, when possible, a short list of options; the user may also type " +
 		"a custom answer. The tool returns the user's answer, or states clearly that no answer was given.",
 	parameters: askUserParameters,
+	// OMP: expose as a top-level tool instead of a deferred "discoverable" one. Upstream Pi ignores this field.
+	loadMode: "essential" as const,
 	async execute(_toolCallId: string, params: AskUserParams, signal?: AbortSignal, _onUpdate?: unknown, ctx?: any) {
 		const result = await askUser(params, {
 			hasUI: ctx?.hasUI === true && ctx?.ui != null,

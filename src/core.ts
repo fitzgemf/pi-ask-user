@@ -35,7 +35,7 @@ function cleanOptions(options: unknown): string[] {
 	for (const o of options) {
 		if (typeof o !== "string") continue;
 		const t = o.trim();
-		if (t && !seen.has(t)) {
+		if (t && t !== CUSTOM_ANSWER_LABEL && !seen.has(t)) {
 			seen.add(t);
 			out.push(t);
 		}

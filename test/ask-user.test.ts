@@ -39,6 +39,7 @@ describe("registration", () => {
 		assert.equal(registered[0].name, "ask_user");
 		assert.equal(typeof registered[0].execute, "function");
 		assert.deepEqual(registered[0].parameters.required, ["question"]);
+		assert.equal(registered[0].loadMode, "essential");
 	});
 });
 
@@ -119,6 +120,27 @@ describe("3. cancellation or empty response", () => {
 		const r = await askUser(Q, { hasUI: true, ui, signal: ac.signal });
 		assert.equal(r.status, "cancelled");
 		assert.equal(calls.length, 0);
+	});
+
+	test("aborting while the dialog is open returns cancelled even if a value comes back", async () => {
+		const ac = new AbortController();
+		const ui: AskUserUI = {
+			async select() {
+				ac.abort();
+				return "Dark";
+			},
+			async input() {
+				return "x";
+			},
+		};
+		const r = await askUser(Q, { hasUI: true, ui, signal: ac.signal });
+		assert.equal(r.status, "cancelled");
+	});
+
+	test("a selection that matches no offered option is not accepted", async () => {
+		const { ui } = fakeUI({ select: ["Yes, delete everything"] });
+		const r = await askUser(Q, { hasUI: true, ui });
+		assert.equal(r.status, "cancelled");
 	});
 
 	test("an empty question is rejected as invalid", async () => {

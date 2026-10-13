@@ -1,0 +1,19 @@
+{
+  "name": "pi-ask-user",
+  "version": "0.1.0",
+  "description": "Pi / Oh My Pi extension: a model-callable ask_user tool that asks the human a question and returns the answer to the agent.",
+  "type": "module",
+  "license": "MIT",
+  "keywords": ["pi-package", "pi-extension", "oh-my-pi", "ask-user"],
+  "main": "src/index.ts",
+  "files": ["src"],
+  "pi": {
+    "extensions": ["./src/index.ts"]
+  },
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "test": "node --test --test-reporter=spec --disable-warning=ExperimentalWarning test/*.test.ts"
+  }
+}

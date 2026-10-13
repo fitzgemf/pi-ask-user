@@ -80,7 +80,7 @@ registered tool's real `execute(toolCallId, params, signal, onUpdate, ctx)`, the
 ## Layout
 
 ```
-docs/DEMO.md   60-90 s recording script
+docs/DEMO.md   
 src/core.ts    askUser() + formatResult(): pure logic, with a small UI interface
 src/index.ts   extension entry: registers the ask_user tool
 test/          node:test suite with a scripted fake UI

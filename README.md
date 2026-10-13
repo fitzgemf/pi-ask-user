@@ -17,13 +17,13 @@ Requires Node ≥ 22.18 for the tests (TypeScript runs natively). Pi/OMP load th
 there is no build step.
 
 ```bash
-git clone https://github.com/<you>/pi-ask-user.git
+git clone https://github.com/fitzgemf/pi-ask-user.git
 cd pi-ask-user
 
 # Oh My Pi (tested with omp 18.10.0)
 omp -e ./src/index.ts
 
-# upstream Pi (same extension API)
+# upstream Pi (same extension API; not live-tested here)
 pi -e ./src/index.ts
 ```
 
@@ -31,6 +31,7 @@ pi -e ./src/index.ts
 `omp -e /path/to/pi-ask-user/src/index.ts`. `package.json` also declares a `pi.extensions` manifest
 for package-based installs.
 
+On OMP the tool sets `loadMode: "essential"`, so it is a top-level tool rather than a deferred one.
 OMP already ships a built-in tool named `ask`. This extension registers `ask_user`, so the two don't collide.
 
 ## Usage
@@ -79,6 +80,7 @@ registered tool's real `execute(toolCallId, params, signal, onUpdate, ctx)`, the
 ## Layout
 
 ```
+docs/DEMO.md   60-90 s recording script
 src/core.ts    askUser() + formatResult(): pure logic, with a small UI interface
 src/index.ts   extension entry: registers the ask_user tool
 test/          node:test suite with a scripted fake UI
